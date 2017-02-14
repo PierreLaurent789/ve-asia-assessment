@@ -1,4 +1,4 @@
-VeAsia Client-side – server-side Assessment
+﻿VeAsia Client-side – server-side Assessment
 
 You will find with this README.txt file, the javascript file "youcanedit.js"
 
@@ -15,3 +15,4 @@ Here are some remarks about my work :
 3) I didnt know how to deal with that ID issue in the first place but after some research I decided to learn how to use Xpath, which I had never encourtered in the past, so it took me a long time to figure out how all this was working. That explain why the code can be pretty heavy and is still optimizable.
 
 Thank you for your time and I hope you'll appreciate my work.
+Pierre LAURENT
