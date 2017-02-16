@@ -22,6 +22,7 @@ function processOrderOnClick(){
 
 	//Specification
 	var specifications = getSpecifications();
+	console.log(specifications)
 	var specificationsCap = capitalizeSpec(specifications);
 
 	//Session ID
