@@ -15,24 +15,22 @@ class myHandler(BaseHTTPRequestHandler):
 	    self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
 	    self.send_header("Access-Control-Allow-Headers", "Content-Type")
 	    self.end_headers()
-	    	
-	#Handler for the POST request
 
+
+	#Handler for the POST request
 	def do_POST(self):
-		print "got post!!"
+		print "\nGot the POST!\n"
 		content_len = int(self.headers.getheader('content-length', 0))
 		post_body = self.rfile.read(content_len)
-		print "post_body(%s)" % (post_body)
+		print "Received object : \n (%s)" % (post_body)
 		postUPPER = post_body.upper()
-		print "post UPPER(%s)" % (postUPPER)
-		print "%s" % post_body
-		test_data = json.loads(post_body)
-		print "test_data(%s)" % (test_data)
-
+		
+		#sending the post_body upper as a response, that my JS wil catch
 		response = postUPPER
 		self.send_response(200)
 		self.end_headers()
-		self.wfile.write(str(response))    
+		self.wfile.write(str(response))   
+		print "\n Sending back JSON :"
 		print response; 
 
 

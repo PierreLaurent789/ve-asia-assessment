@@ -5,7 +5,6 @@
 ///////////////MAIN//////////////////////
 
 var x, inputList = document.getElementsByTagName("input"); //we get all the inputs in a list and scroll it with the x
-
 for(x in inputList) {
     if (inputList[x].value =="Order") {		//test if the value ofthe input is Order, corresponding to the button
         
@@ -21,8 +20,8 @@ function processOrderOnClick(){
 
 	//Specification
 	var specifications = getSpecifications();
-	var specLength = Object.keys(specifications).length
-	var specificationsTitled = {"specifications" :specifications};
+	var specLength = Object.keys(specifications).length //using the length to read the JSON object returning from the server
+	var specificationsTitled = {"specifications" :specifications}; //adding "specifications" to the JSON to identify the elements of the JSON object returning from the server
 
 	//Session ID
 	var sessionIdEncoded = document.getElementById('session_id').value;
@@ -56,12 +55,12 @@ function processOrderOnClick(){
 	        if (XHR.readyState == 4) {
 	            if (XHR.status == 200) {
 					var dataResponse = XHR.responseText;
-					var dataJsonResponse = JSON.parse(dataResponse);
+					var dataJsonResponse = JSON.parse(dataResponse); //parsing the JSON
 
+					//recovering the 3 objects from the JSON returning from server
 					var productNameCap = recoverProductName(dataJsonResponse)
 					var specificationsCap = recoverSpecifications(dataJsonResponse, specLength)
 					var sessionIdCap = recoverSessionId(dataJsonResponse)
-
 
 					//printing the data in the grey textarea
 					printData(productNameCap, specificationsCap, sessionId);
@@ -76,10 +75,9 @@ function processOrderOnClick(){
 };
 
 
-
 ///////////////functions//////////////////////
 
-//function get eh nam of the product from the first h4 of the body in the DOM
+//function get the name of the product from the first h4 of the body in the DOM
 function getProductName(){
 	var xpathToProductName = '//body/h4'		//xpath to the h4 elements
 	var nodeProductNameXPath =  document.evaluate(xpathToProductName, document, null, XPathResult.ANY_TYPE, null );
@@ -163,7 +161,6 @@ function formatDate(date) {
 // we're retrieving tha data object and need to decode it, I simply looked at the structure ofwhat i was receiving from the server
 function recoverProductName(data){
 	var productNameCap = data.DATATOSEND[0].PRODUCTNAME
-	console.log(productNameCap);
 	return productNameCap;
 }
 
@@ -174,20 +171,17 @@ function recoverSpecifications(data, specLength){
 		var specificationElements = {name:data.DATATOSEND[1][i].NAME, value: data.DATATOSEND[1][i].VALUE}
 		specificationArray.push(specificationElements); 
 	};
-	console.log(specificationArray);
 	return specificationArray;
 }
 
 function recoverSessionId(data){
 	var sessionId = data.DATATOSEND[2].SESSIONID
-	console.log(sessionId);
 	return sessionId;
 }
 
 //print the data in the textarea
 function printData(productNameCap, specificationsCap, sessionID){
-	var dataToPrint ='Order Processed :' + '\n' +
-		productNameCap + '\n';
+	var dataToPrint ='Order Processed :' + '\n' + productNameCap + '\n';
 
 	for (var i=0; i<specificationsCap.length; i++){
 		dataToPrint +='  ' + specificationsCap[i].name + ":" + specificationsCap[i].value + '\n'
