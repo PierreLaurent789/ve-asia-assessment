@@ -40,17 +40,17 @@ function processOrderOnClick(){
 	var XHR = new XMLHttpRequest();
 	//Alert if the data are successfully sent
 	XHR.addEventListener('load', function(event) {
-		alert('Data sent and response loaded.');
+		console.log('Data sent and response loaded.');
 	});
 	///Alert in case of error
 	XHR.addEventListener('error', function(event) {
-		alert('Something went wrong.');
+		console.error('Something went wrong.');
 	});
 
 	// We setup our request
 	XHR.open('POST', 'http://localhost:8080');
 
-	XHR.setRequestHeader("Content-Type", "text/xml");
+	XHR.setRequestHeader("Content-Type", "javascript/json");
 	    XHR.onreadystatechange = function () {
 	        if (XHR.readyState == 4) {
 	            if (XHR.status == 200) {
